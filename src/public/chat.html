@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/grid.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <title>Tender app group</title>
+  </head>
+  <body>
+    <div class="grid wide container">
+      <div class="row chat-container">
+        <div class="col l-4 c-0 group-chat">
+          <h3><i class="fas fa-users"></i>Người dùng đang online</h3>
+          <ul id="users"></ul>
+        </div>
+        <div class="row l-6 m-6 c-12 chat-mgs">
+          <div class="row title-chat">
+            <div class="title-group-chat">
+              <h1>
+                Nhóm chat
+                <p id="room-name"></p>
+              </h1>
+            </div>
+            <div class="icon--notify">
+              <ul>
+                <li><i class="far fa-bell"></i></li>
+                <li><i class="fas fa-user-graduate"></i></li>
+                <li><i class="far fa-user"></i></li>
+              </ul>
+            </div>
+          </div>
+          <div class="message-container"></div>
+
+          <div class="row chat-form-container">
+            <form id="chat-form">
+              <input
+                id="msg"
+                type="text"
+                placeholder="Write something"
+                required
+                autocomplete="off"
+              />
+              <button class="btn cta-1">
+                <span><i class="fas fa-paper-plane"></i>Send</span>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col l-2 c-0 chat-info">
+          <div class="btn-leave">
+            <a id="leave-btn" class="btn link-1">
+              <i class="fas fa-sign-out-alt"></i>
+              Leave Room
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+      integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
