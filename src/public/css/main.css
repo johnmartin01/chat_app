@@ -4,9 +4,22 @@
 .chat-info {
   max-height: 100vh;
 }
-.group-chat {
+.message-user {
   margin-top: 48px;
   font-size: 1.6rem;
+  color: #2f89fc;
+}
+.message-user i {
+  margin-right: 8px;
+}
+
+.message-user ul {
+  margin-left: 40px;
+  margin-top: 16px;
+}
+
+.message-user ul li {
+  margin: 8px;
 }
 
 .chat-mgs {
@@ -19,6 +32,7 @@
   margin-top: 32px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .chat-mgs .title-chat .title-group-chat {
@@ -29,6 +43,7 @@
 .chat-mgs .icon--notify {
   margin-right: 32px;
   cursor: pointer;
+  color: #222831;
 }
 
 .chat-mgs .icon--notify li {
@@ -42,8 +57,8 @@
 
 .message-container {
   overflow-y: scroll;
-  min-height: 536px;
-  max-height: 536px;
+  min-height: 520px;
+  max-height: 520px;
 }
 .message-container .message-box {
   padding: 16px 16px;
@@ -54,6 +69,14 @@
   overflow-wrap: break-word;
   box-shadow: 4px 4px 12px #888888;
 }
+/* .message-container .message-box::after {
+  content: '';
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  left: 0;
+} */
+
 .message-container .message-box .message-text {
   color: #000;
   margin-bottom: 8px;
@@ -89,12 +112,13 @@
 
 .chat-info .btn-leave {
   margin-top: 32px;
+  margin-left: 4px;
 }
 
 /* Link hover effect */
 .link-1 {
   position: relative;
-  color: rgb(221, 33, 33);
+  color: #ff304f;
   font-size: 1.6rem;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -107,13 +131,13 @@
   height: 3px;
   bottom: 0;
   left: 0;
-  background-color: #4f46e5;
+  background-color: #c94e4e;
   transform: scaleX(0);
   transform-origin: bottom left;
   transition: all 0.3s ease;
 }
 .link-1:hover {
-  color: #4f46e5;
+  color: #c94e4e;
 }
 
 .link-1:hover::after {

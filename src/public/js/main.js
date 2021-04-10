@@ -21,11 +21,19 @@ socket.on('roomUsers', ({ room, users }) => {
 
 // Message from server
 socket.on('message', (message) => {
-  console.log(message);
+  // console.log(message);
   outputMessage(message);
-
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+// Show message DB
+
+socket.on('output-messages', (data) => {
+  if (data.length) {
+    data.forEach((message) => {
+      outputMessage(message);
+    });
+  }
 });
 
 // Message submit
@@ -42,8 +50,8 @@ chatForm.addEventListener('submit', (e) => {
   }
 
   // Emit message to server
-  socket.emit('chatMessage', msg);
-
+  socket.emit('chatMessage', chatForm.msg.value);
+  // console.log('submit from chatForm', chatForm.msg.value);
   // Clear input
   e.target.elements.msg.value = '';
   e.target.elements.msg.focus();
@@ -56,6 +64,7 @@ function outputMessage(message) {
   const para = document.createElement('p');
   para.classList.add('message-text');
   para.innerText = message.text;
+  console.log(message.text);
   div.appendChild(para);
   const p = document.createElement('p');
   p.classList.add('message-meta');

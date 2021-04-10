@@ -10,13 +10,16 @@ const {
   getRoomUsers,
 } = require('./utils/users');
 
-// Connect to DB
-const db = require('././config/db/');
-db.connect();
-
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+
+// Config router
+const route = require('./routes');
+// Connect to DB
+const db = require('././config/db/');
+db.connect();
+const Message = require('./app/models/Messages');
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,6 +28,10 @@ const botName = 'Chat Bot';
 
 // Run when client connects
 io.on('connection', (socket) => {
+  Message.find().then((result) => {
+    socket.emit('output-messages', result);
+  });
+
   socket.on('joinRoom', ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
@@ -35,7 +42,7 @@ io.on('connection', (socket) => {
       'message',
       formatMessage(
         botName,
-        `${user.username}, chào mừng bạn đã vào nhóm ${user.room}.`
+        `Chào mừng, ${user.username} đã vào nhóm ${user.room}.`
       )
     );
 
@@ -59,6 +66,10 @@ io.on('connection', (socket) => {
     const user = getCurrentUser(socket.id);
 
     io.to(user.room).emit('message', formatMessage(user.username, msg));
+    const message = new Message({ msg });
+    message.save().then(() => {
+      io.emit('message', msg);
+    });
   });
 
   // Runs when client disconnects
@@ -82,4 +93,7 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Route init
+route(app);
+
+server.listen(PORT, () => console.log(`App running on port ${PORT}`));

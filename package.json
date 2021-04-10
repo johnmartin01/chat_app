@@ -2,10 +2,10 @@
   "name": "chatapp",
   "version": "1.0.0",
   "description": "Realtime chat app with rooms",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node src/server",
-    "dev": "nodemon src/server"
+    "app": "node src/index",
+    "dev": "nodemon src/index"
   },
   "author": "Công Đat",
   "license": "BK",
