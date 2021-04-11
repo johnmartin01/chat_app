@@ -37,7 +37,6 @@ io.on('connection', (socket) => {
     });
 
   socket.on('joinRoom', ({ sender, room }) => {
-    console.log(sender + room);
     const user = userJoin(socket.id, sender, room);
     socket.join(user.room);
     // Welcome current user
@@ -78,8 +77,6 @@ io.on('connection', (socket) => {
       room: user.room,
       time: moment().format('HH:mm a'),
     });
-
-    // let chatMessage = new Chat({ message: msg, sender: "Anonymous" });
     message.save();
   });
 

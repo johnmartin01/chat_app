@@ -3,7 +3,7 @@ const chatMessages = document.querySelector('.message-container');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 
-// Get username and room from URL
+// Get sender and room from URL
 const { sender, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
@@ -84,6 +84,7 @@ function outputUsers(users) {
   userList.innerHTML = '';
   users.forEach((user) => {
     const li = document.createElement('li');
+    console.log(user.sender);
     li.innerText = user.sender;
     userList.appendChild(li);
   });
