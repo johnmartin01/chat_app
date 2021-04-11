@@ -3,6 +3,7 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
+const moment = require('moment');
 const {
   userJoin,
   getCurrentUser,
@@ -20,7 +21,7 @@ const route = require('./routes');
 const db = require('././config/db/');
 db.connect();
 const Message = require('./app/models/Messages');
-
+app.use(express.json());
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -28,21 +29,23 @@ const botName = 'Chat Bot';
 
 // Run when client connects
 io.on('connection', (socket) => {
-  Message.find().then((result) => {
-    socket.emit('output-messages', result);
-  });
+  Message.find()
+    .limit(100)
+    // .sort({ _id: 1 })
+    .then((result) => {
+      socket.emit('output-messages', result);
+    });
 
-  socket.on('joinRoom', ({ username, room }) => {
-    const user = userJoin(socket.id, username, room);
-
+  socket.on('joinRoom', ({ sender, room }) => {
+    console.log(sender + room);
+    const user = userJoin(socket.id, sender, room);
     socket.join(user.room);
-
     // Welcome current user
     socket.emit(
       'message',
       formatMessage(
         botName,
-        `Chào mừng, ${user.username} đã vào nhóm ${user.room}.`
+        `Chào mừng, ${user.sender} đã vào nhóm ${user.room}.`
       )
     );
 
@@ -51,7 +54,7 @@ io.on('connection', (socket) => {
       .to(user.room)
       .emit(
         'message',
-        formatMessage(botName, `${user.username} đã vào phòng chat`)
+        formatMessage(botName, `${user.sender} đã vào phòng chat`)
       );
 
     // Send users and room info
@@ -64,12 +67,20 @@ io.on('connection', (socket) => {
   // Listen for chatMessage
   socket.on('chatMessage', (msg) => {
     const user = getCurrentUser(socket.id);
-
-    io.to(user.room).emit('message', formatMessage(user.username, msg));
-    const message = new Message({ msg });
-    message.save().then(() => {
-      io.emit('message', msg);
+    // console.log(msg);
+    io.to(user.room).emit(
+      'message',
+      formatMessage(user.sender, msg, user.room)
+    );
+    const message = new Message({
+      text: msg,
+      sender: user.sender,
+      room: user.room,
+      time: moment().format('HH:mm a'),
     });
+
+    // let chatMessage = new Chat({ message: msg, sender: "Anonymous" });
+    message.save();
   });
 
   // Runs when client disconnects
@@ -79,7 +90,7 @@ io.on('connection', (socket) => {
     if (user) {
       io.to(user.room).emit(
         'message',
-        formatMessage(botName, `${user.username} đã rời khỏi`)
+        formatMessage(botName, `${user.sender} đã rời khỏi`)
       );
 
       // Send users and room info

@@ -4,19 +4,29 @@ const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 
 // Get username and room from URL
-const { username, room } = Qs.parse(location.search, {
+const { sender, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
 const socket = io();
 
 // Join chatroom
-socket.emit('joinRoom', { username, room });
+socket.emit('joinRoom', { sender, room });
 
 // Get room and users
 socket.on('roomUsers', ({ room, users }) => {
   outputRoomName(room);
   outputUsers(users);
+});
+
+// Show message DB
+socket.on('output-messages', (data) => {
+  if (data.length) {
+    data.forEach((message) => {
+      outputMessage(message);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
+  }
 });
 
 // Message from server
@@ -26,15 +36,6 @@ socket.on('message', (message) => {
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
-// Show message DB
-
-socket.on('output-messages', (data) => {
-  if (data.length) {
-    data.forEach((message) => {
-      outputMessage(message);
-    });
-  }
-});
 
 // Message submit
 chatForm.addEventListener('submit', (e) => {
@@ -42,15 +43,15 @@ chatForm.addEventListener('submit', (e) => {
 
   // Get message text
   let msg = e.target.elements.msg.value;
-
   msg = msg.trim();
-
+  // console.log(msg);
   if (!msg) {
     return false;
   }
 
   // Emit message to server
   socket.emit('chatMessage', chatForm.msg.value);
+
   // console.log('submit from chatForm', chatForm.msg.value);
   // Clear input
   e.target.elements.msg.value = '';
@@ -64,11 +65,10 @@ function outputMessage(message) {
   const para = document.createElement('p');
   para.classList.add('message-text');
   para.innerText = message.text;
-  console.log(message.text);
   div.appendChild(para);
   const p = document.createElement('p');
   p.classList.add('message-meta');
-  p.innerText = message.username;
+  p.innerText = message.sender;
   p.innerHTML += `<span>${message.time}</span>`;
   div.appendChild(p);
   document.querySelector('.message-container').appendChild(div);
@@ -84,7 +84,7 @@ function outputUsers(users) {
   userList.innerHTML = '';
   users.forEach((user) => {
     const li = document.createElement('li');
-    li.innerText = user.username;
+    li.innerText = user.sender;
     userList.appendChild(li);
   });
 }
