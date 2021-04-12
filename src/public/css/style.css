@@ -1,0 +1,76 @@
+.join-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.join-header {
+  color: #0099cc;
+}
+.join-header i {
+  margin-right: 8px;
+}
+
+.join-main {
+  color: #00112c;
+}
+
+.form-control {
+  margin: 16px;
+  font-size: 24px;
+}
+.form-control label {
+  display: block;
+  color: #003666;
+}
+.form-control input,
+.form-control select {
+  font-size: 24px;
+}
+
+.btn {
+  position: relative;
+  padding: 6px;
+  border: none;
+  font-size: 1.4rem;
+  background-color: #e0e7ff;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-left: 120px;
+  margin-top: 24px;
+}
+
+.btn:active,
+.btn:focus {
+  outline: none;
+}
+
+.btn span {
+  position: relative;
+  color: #4f46e5;
+  transition: all 0.6s ease;
+}
+.btn::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #4f46e5;
+  transform: scaleX(0);
+  transform-origin: 100%;
+  transition: transform 0.6s ease;
+}
+.btn:hover::before {
+  transform-origin: 0;
+  transform: scaleX(1);
+}
+
+.btn:hover span {
+  color: #e0e7ff;
+}

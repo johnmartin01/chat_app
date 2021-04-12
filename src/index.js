@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
       text: msg,
       sender: user.sender,
       room: user.room,
-      time: moment().format('HH:mm a'),
+      time: moment().calendar(),
     });
     message.save();
   });
