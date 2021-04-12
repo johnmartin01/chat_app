@@ -29,16 +29,15 @@ const botName = 'Chat Bot';
 
 // Run when client connects
 io.on('connection', (socket) => {
-  Message.find()
-    .limit(100)
-    // .sort({ _id: 1 })
-    .then((result) => {
-      socket.emit('output-messages', result);
-    });
-
   socket.on('joinRoom', ({ sender, room }) => {
     const user = userJoin(socket.id, sender, room);
     socket.join(user.room);
+    Message.find({ room: room })
+      .limit(100)
+      // .sort({ _id: 1 })
+      .then((result) => {
+        socket.emit('output-messages', result);
+      });
     // Welcome current user
     socket.emit(
       'message',

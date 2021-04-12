@@ -1,5 +1,5 @@
 const chatForm = document.getElementById('chat-form');
-const chatMessages = document.querySelector('.message-container');
+const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 
@@ -60,18 +60,45 @@ chatForm.addEventListener('submit', (e) => {
 
 // Output message to DOM
 function outputMessage(message) {
-  const div = document.createElement('div');
-  div.classList.add('message-box');
-  const para = document.createElement('p');
-  para.classList.add('message-text');
-  para.innerText = message.text;
-  div.appendChild(para);
-  const p = document.createElement('p');
-  p.classList.add('message-meta');
-  p.innerText = message.sender;
-  p.innerHTML += `<span>${message.time}</span>`;
-  div.appendChild(p);
-  document.querySelector('.message-container').appendChild(div);
+  if (message.sender == sender) {
+    const div = document.createElement('div');
+    div.classList.add('message-container', 'justify-end');
+    const para = document.createElement('p');
+    para.classList.add('sent-text', 'pr-10');
+    para.innerText = message.sender;
+    div.appendChild(para);
+    const divBox = document.createElement('div');
+    divBox.classList.add('message-box', 'background-blue');
+    div.appendChild(divBox);
+    const p = document.createElement('p');
+    p.classList.add('message-text', 'color-white');
+    p.innerText = message.text;
+    divBox.appendChild(p);
+    const span = document.createElement('span');
+    span.classList.add('color-white');
+    span.innerText = message.time;
+    divBox.appendChild(span);
+    document.querySelector('.chat-messages').appendChild(div);
+  } else {
+    const div = document.createElement('div');
+    div.classList.add('message-container', 'justify-start');
+    const divBox = document.createElement('div');
+    divBox.classList.add('message-box', 'background-light');
+    div.appendChild(divBox);
+    const p = document.createElement('p');
+    p.classList.add('message-text', 'color-dark');
+    p.innerText = message.text;
+    divBox.appendChild(p);
+    const span = document.createElement('span');
+    span.classList.add('color-dark');
+    span.innerText = message.time;
+    divBox.appendChild(span);
+    const para = document.createElement('p');
+    para.classList.add('sent-text', 'pl-10');
+    para.innerText = message.sender;
+    div.appendChild(para);
+    document.querySelector('.chat-messages').appendChild(div);
+  }
 }
 
 // Add room name to DOM
