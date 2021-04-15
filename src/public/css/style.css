@@ -9,10 +9,9 @@
 .join-header {
   color: #0099cc;
 }
-.join-header i {
-  margin-right: 8px;
+.join-header img {
+  padding-right: 8px;
 }
-
 .join-main {
   color: #00112c;
 }

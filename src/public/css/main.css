@@ -4,6 +4,10 @@
 .chat-info {
   max-height: 100vh;
 }
+.chat-container img {
+  margin-right: 8px;
+}
+
 .message-user {
   margin-top: 48px;
   font-size: 1.6rem;
@@ -27,6 +31,10 @@
 }
 
 .chat-info {
+}
+
+.chat-info img {
+  margin-top: 54px;
 }
 .chat-mgs .title-chat {
   margin-top: 32px;
@@ -107,7 +115,7 @@
 }
 
 .chat-info .btn-leave {
-  margin-top: 32px;
+  margin-top: 8px;
   margin-left: 4px;
 }
 
