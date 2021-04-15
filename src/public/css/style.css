@@ -46,6 +46,7 @@
 .btn:active,
 .btn:focus {
   outline: none;
+  transform: scale(0.98);
 }
 
 .btn span {
