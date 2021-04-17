@@ -1,0 +1,35 @@
+/* 
+PC >=1024px
+740px <= Table < 1024px
+Mobile < 740px 
+*/
+/* PC */
+@media (min-width: 1024px) {
+}
+/* Table */
+@media (max-width: 1023px) {
+  .btn-submit {
+    display: inline-block;
+    width: 50vh;
+  }
+}
+/* Table */
+@media (max-width: 1023px) and (min-width: 740px) {
+}
+/* Mobile */
+@media (max-width: 739px) {
+  .btn-submit {
+    display: inline-block;
+    width: 30vh;
+    margin: auto auto;
+  }
+  .chat-form-container input[type='text'] {
+    max-width: 250px;
+  }
+  .cta-1 {
+    font-size: 2rem;
+  }
+  .message-box {
+    min-width: 65%;
+  }
+}

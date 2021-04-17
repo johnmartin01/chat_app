@@ -14,25 +14,30 @@ const socket = io();
 socket.emit('joinRoom', { sender, room });
 
 // Get room and users
-socket.on('roomUsers', ({ room, users }) => {
-  outputRoomName(room);
-  outputUsers(users);
+socket.on('roomUsers', async ({ room, users }) => {
+  await outputRoomName(room);
+  await outputUsers(users);
 });
 
 // Show message DB
 socket.on('output-messages', (data) => {
   if (data.length) {
-    data.forEach((message) => {
-      outputMessage(message);
+    data.forEach(async (message) => {
+      await outputMessage(message);
       chatMessages.scrollTop = chatMessages.scrollHeight;
     });
   }
 });
 
 // Message from server
-socket.on('message', (message) => {
+socket.on('message', async (message) => {
   // console.log(message);
-  outputMessage(message);
+  await outputMessage(message);
+  const icon = '../image/chat.png';
+  if (message.sender !== sender) {
+    // notifyMe(message.text);
+    spawnNotification(message.text, icon, message.sender);
+  }
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
@@ -127,3 +132,27 @@ document.getElementById('leave-btn').addEventListener('click', () => {
   } else {
   }
 });
+
+// Notification
+function notifyMe(message) {
+  var isPushEnabled = false;
+  if (!('Notification' in window)) {
+    alert('This browser does not support desktop notification');
+  } else if (Notification.permission === 'granted') {
+    var notification = new Notification(message);
+  } else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      if (permission === 'granted') {
+        var notification = new Notification(message);
+      }
+    });
+  }
+}
+
+function spawnNotification(theBody, theIcon, theTitle) {
+  var options = {
+    body: theBody,
+    icon: theIcon,
+  };
+  var n = new Notification(theTitle, options);
+}

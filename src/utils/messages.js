@@ -6,7 +6,7 @@ function formatMessage(sender, text, room) {
     text,
     room,
     // time: moment().format('HH:mm a'),
-    time: moment().calendar(),
+    time: moment().format('MMMM Do YYYY, h:mm:ss a'),
   };
 }
 
