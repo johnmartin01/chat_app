@@ -33,6 +33,7 @@ socket.on('output-messages', (data) => {
 socket.on('message', async (message) => {
   // console.log(message);
   await outputMessage(message);
+  console.log(message.createdAt);
   const icon = '../image/chat.png';
   if (message.sender !== sender) {
     // notifyMe(message.text);
@@ -116,7 +117,6 @@ function outputUsers(users) {
   userList.innerHTML = '';
   users.forEach((user) => {
     const li = document.createElement('li');
-    console.log(user.sender);
     li.innerText = user.sender;
     userList.appendChild(li);
   });
