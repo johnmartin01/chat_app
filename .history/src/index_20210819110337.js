@@ -13,8 +13,6 @@ const {
 
 const dotenv = require('dotenv');
 
-dotenv.config();
-
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
@@ -102,7 +100,7 @@ io.on('connection', (socket) => {
     });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Route init
 route(app);

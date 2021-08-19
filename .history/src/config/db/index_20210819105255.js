@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const URL = process.env.DATABASE_URL;
+const URL =
+    'mongodb+srv://congdat:<password>@cluster0.lspg7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 async function connect() {
     try {

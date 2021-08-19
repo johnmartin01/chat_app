@@ -1,0 +1,194 @@
+.chat-container,
+.group-chat,
+.chat-mgs,
+.chat-info {
+  max-height: 100vh;
+}
+.chat-container img {
+  margin-right: 8px;
+}
+
+.message-user {
+  margin-top: 48px;
+  font-size: 1.6rem;
+  color: #2f89fc;
+}
+.message-user i {
+  margin-right: 8px;
+}
+
+.message-user ul {
+  margin-left: 40px;
+  margin-top: 16px;
+}
+
+.message-user ul li {
+  margin: 8px;
+}
+
+.chat-mgs {
+  background-color: var(--mgs-color);
+}
+
+.chat-info {
+}
+
+.chat-info img {
+  margin-top: 54px;
+}
+.chat-mgs .title-chat {
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.chat-mgs .title-chat .title-group-chat {
+  margin-left: 48px;
+  font-weight: 100;
+}
+
+.chat-mgs .icon--notify {
+  margin-right: 32px;
+  cursor: pointer;
+  color: #222831;
+}
+
+.chat-mgs .icon--notify li {
+  list-style: none;
+  display: inline-block;
+  margin: 0px 12px;
+  font-size: 1.2rem;
+  opacity: 0.5;
+}
+/* Chat messages */
+
+.chat-messages {
+  overflow-y: scroll;
+  min-height: 520px;
+  max-height: 520px;
+  position: relative;
+}
+/* .chat-messages .message-box {
+  padding: 16px 16px;
+  margin: 20px 40px;
+  max-width: 50%;
+  min-width: 50%;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow-wrap: break-word;
+  box-shadow: 4px 4px 12px #888888;
+  display: inline-block;
+}
+
+.chat-messages .message-box .message-text {
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.chat-messages .message-box .message-meta {
+  color: #000;
+  opacity: 0.5;
+  display: flex;
+  justify-content: space-between;
+} */
+
+/* Chat input */
+
+.chat-form-container {
+  padding: 20px 30px;
+}
+
+.chat-form-container form {
+  display: flex;
+}
+
+.chat-form-container input[type='text'] {
+  font-size: 16px;
+  padding: 5px;
+  height: 40px;
+  flex: 1;
+  width: 500px;
+  outline-style: none;
+  background-color: var(--mgs-color);
+  border-style: none;
+}
+
+.chat-info .btn-leave {
+  margin-top: 8px;
+  margin-left: 4px;
+}
+
+/* Link hover effect */
+.link-1 {
+  position: relative;
+  color: #ff304f;
+  font-size: 1.6rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.link-1::after {
+  content: '';
+  width: 100%;
+  position: absolute;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: #c94e4e;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: all 0.3s ease;
+}
+.link-1:hover {
+  color: #c94e4e;
+}
+
+.link-1:hover::after {
+  transform: scaleX(1);
+}
+
+/* Button hover effect */
+.cta-1 {
+  position: relative;
+  padding: 6px;
+  border: none;
+  font-size: 1.4rem;
+  background-color: #e0e7ff;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.cta-1:active,
+.cta-1:focus {
+  outline: none;
+}
+
+.cta-1 span {
+  position: relative;
+  color: #4f46e5;
+  transition: all 0.6s ease;
+}
+.cta-1::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #4f46e5;
+  transform: scaleX(0);
+  transform-origin: 100%;
+  transition: transform 0.6s ease;
+}
+.cta-1:hover::before {
+  transform-origin: 0;
+  transform: scaleX(1);
+}
+
+.cta-1:hover span {
+  color: #e0e7ff;
+}

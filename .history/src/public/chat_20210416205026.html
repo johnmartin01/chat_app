@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/grid.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/message.css" />
+    <link rel="icon" type="image/png" sizes="513x513" href="./image/chat.png" />
+    <link rel="stylesheet" href="./css/responsive.css" />
+    <title>Chat group</title>
+  </head>
+  <body>
+    <div class="grid wide container">
+      <div class="row chat-container">
+        <div class="col l-4 m-0 c-0 message-user">
+          <h3>
+            <img src="./image/profile.png" alt="Icon Chat" width="43" />
+            Thành viên đang Online:
+          </h3>
+          <ul id="users"></ul>
+        </div>
+        <div class="row l-6 m-12 c-12 chat-mgs">
+          <div class="row title-chat">
+            <div class="title-group-chat">
+              <h1>
+                Nhóm chat
+                <p id="room-name"></p>
+              </h1>
+            </div>
+            <div class="icon--notify">
+              <ul>
+                <li onclick="notifyMe()"><i class="far fa-bell"></i></li>
+                <li><i class="fas fa-user-graduate"></i></li>
+                <li><i class="far fa-user"></i></li>
+              </ul>
+            </div>
+          </div>
+          <div class="chat-messages"></div>
+
+          <div class="row chat-form-container">
+            <form id="chat-form">
+              <input
+                id="msg"
+                type="text"
+                placeholder="Write something"
+                required
+                autocomplete="off"
+              />
+              <button class="btn cta-1">
+                <span><i class="fas fa-paper-plane"></i>Send</span>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col l-2 m-0 c-0 chat-info">
+          <img src="./image/logout.png" alt="Icon Chat" width="43" />
+          <div class="btn-leave">
+            <a id="leave-btn" class="btn link-1"> Leave Room </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+      integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+    <!-- <script src="js/notifi.js"></script> -->
+  </body>
+</html>
